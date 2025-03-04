@@ -24,6 +24,8 @@
         .bookmark {
             padding: 10px;
             border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
         }
         .bookmark:last-child {
             border-bottom: none;
@@ -36,15 +38,71 @@
         a:hover {
             text-decoration: underline;
         }
+        .remove-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .remove-btn:hover {
+            background: darkred;
+        }
+        .add-bookmark {
+            text-align: center;
+            margin-top: 20px;
+        }
+        input {
+            padding: 8px;
+            width: 200px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
 <body>
     <h1>My Bookmarks</h1>
-    <div class="bookmark-list">
-        <div class="bookmark"><a href="https://www.google.com" target="_blank">Google</a></div>
-        <div class="bookmark"><a href="https://www.github.com" target="_blank">GitHub</a></div>
-        <div class="bookmark"><a href="https://www.stackoverflow.com" target="_blank">Stack Overflow</a></div>
-        <div class="bookmark"><a href="https://www.reddit.com" target="_blank">Reddit</a></div>
+    <div class="bookmark-list" id="bookmarkList">
+        <div class="bookmark"><a href="https://www.google.com" target="_blank">Google</a> <button class="remove-btn" onclick="removeBookmark(this)">Remove</button></div>
+        <div class="bookmark"><a href="https://www.github.com" target="_blank">GitHub</a> <button class="remove-btn" onclick="removeBookmark(this)">Remove</button></div>
+        <div class="bookmark"><a href="https://www.stackoverflow.com" target="_blank">Stack Overflow</a> <button class="remove-btn" onclick="removeBookmark(this)">Remove</button></div>
+        <div class="bookmark"><a href="https://www.reddit.com" target="_blank">Reddit</a> <button class="remove-btn" onclick="removeBookmark(this)">Remove</button></div>
     </div>
+    <div class="add-bookmark">
+        <input type="text" id="bookmarkName" placeholder="Enter bookmark name">
+        <input type="text" id="bookmarkURL" placeholder="Enter URL">
+        <button onclick="addBookmark()">Add Bookmark</button>
+    </div>
+    <script>
+        function removeBookmark(button) {
+            button.parentElement.remove();
+        }
+        function addBookmark() {
+            let name = document.getElementById('bookmarkName').value;
+            let url = document.getElementById('bookmarkURL').value;
+            if (name && url) {
+                let list = document.getElementById('bookmarkList');
+                let div = document.createElement('div');
+                div.classList.add('bookmark');
+                div.innerHTML = `<a href="${url}" target="_blank">${name}</a> <button class="remove-btn" onclick="removeBookmark(this)">Remove</button>`;
+                list.appendChild(div);
+                document.getElementById('bookmarkName').value = '';
+                document.getElementById('bookmarkURL').value = '';
+            } else {
+                alert('Please enter both a name and URL.');
+            }
+        }
+    </script>
 </body>
 </html>
