@@ -1,76 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f4;
+    @apply bg-black text-white flex justify-center items-center h-screen;
 }
 
-h1 {
-    text-align: center;
+.container {
+    @apply bg-gray-900 p-6 rounded-lg shadow-lg w-96;
 }
 
-.bookmark-list {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+.title {
+    @apply text-center text-2xl font-bold mb-4;
 }
 
-.bookmark {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
-}
-
-.bookmark:last-child {
-    border-bottom: none;
-}
-
-a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.remove-btn {
-    background: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.remove-btn:hover {
-    background: darkred;
-}
-
-.add-bookmark {
-    text-align: center;
-    margin-top: 20px;
+.input-container {
+    @apply flex gap-3;
 }
 
 input {
-    padding: 8px;
-    width: 200px;
-    margin-right: 10px;
+    @apply flex-1 p-2 bg-gray-800 border border-gray-700 rounded-lg text-white;
 }
 
 button {
-    padding: 8px 12px;
-    cursor: pointer;
-    background: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    @apply bg-blue-600 text-white px-4 py-2 rounded-lg transition hover:bg-blue-500;
 }
 
-button:hover {
-    background: #0056b3;
+.bookmark-list {
+    @apply mt-4;
+}
+
+.bookmark-item {
+    @apply bg-gray-800 p-3 rounded-lg flex justify-between items-center mb-2;
+}
+
+.bookmark-item a {
+    @apply text-blue-400 hover:underline;
+}
+
+.bookmark-item button {
+    @apply bg-red-600 text-white px-2 py-1 rounded-lg transition hover:bg-red-500;
 }
