@@ -31,3 +31,13 @@ app.delete("/bookmarks", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
+app.put("/bookmarks", (req, res) => {
+    const { name, url, newName, newUrl } = req.body;
+    const bookmark = bookmarks.find(bookmark => bookmark.name === name && bookmark.url === url);
+    if (!bookmark) {
+        return res.status(404).json({ message: "Bookmark not found" });
+    }
+    if (newName) bookmark.name = newName;
+    if (newUrl) bookmark.url = newUrl;
+    res.json({ message: "Bookmark updated successfully" });
+});
