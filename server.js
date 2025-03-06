@@ -1,11 +1,8 @@
-import express from "express";
-import cors from "cors";
-
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = 5000;
-
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
 let bookmarks = [];
 
@@ -14,30 +11,35 @@ app.get("/bookmarks", (req, res) => {
 });
 
 app.post("/bookmarks", (req, res) => {
-    const { name, url } = req.body;
-    if (!name || !url) {
-        return res.status(400).json({ message: "Name and URL are required" });
-    }
-    bookmarks.push({ name, url });
-    res.status(201).json({ message: "Bookmark added successfully" });
+    const { url, title } = req.body;
+    if (!url || !title) return res.status(400).json({ error: "URL and title are required" });
+    const newBookmark = { id: Date.now(), url, title };
+    bookmarks.push(newBookmark);
+    res.json({ message: "Bookmark added", bookmark: newBookmark });
 });
+
+app.delete("/bookmarks/:id", (req, res) => {
+    const { id } = req.params;
+    bookmarks = bookmarks.filter(bookmark => bookmark.id !== parseInt(id));
+    res.json({ message: "Bookmark deleted" });
+});
+
+
+app.put("/bookmarks/:id", (req, res) => {
+    const { id } = req.params;
+    const { url, title } = req.body;
+    let bookmark = bookmarks.find(b => b.id === parseInt(id));
+    if (!bookmark) return res.status(404).json({ error: "Bookmark not found" });
+    if (url) bookmark.url = url;
+    if (title) bookmark.title = title;
+    res.json({ message: "Bookmark updated", bookmark });
+});
+
 
 app.delete("/bookmarks", (req, res) => {
-    const { url } = req.body;
-    bookmarks = bookmarks.filter(bookmark => bookmark.url !== url);
-    res.json({ message: "Bookmark deleted successfully" });
+    bookmarks = [];
+    res.json({ message: "All bookmarks deleted" });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
-app.put("/bookmarks", (req, res) => {
-    const { name, url, newName, newUrl } = req.body;
-    const bookmark = bookmarks.find(bookmark => bookmark.name === name && bookmark.url === url);
-    if (!bookmark) {
-        return res.status(404).json({ message: "Bookmark not found" });
-    }
-    if (newName) bookmark.name = newName;
-    if (newUrl) bookmark.url = newUrl;
-    res.json({ message: "Bookmark updated successfully" });
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

@@ -3,41 +3,41 @@
 @tailwind utilities;
 
 body {
-    @apply bg-black text-white flex justify-center items-center h-screen;
+    @apply bg-yellow-100 text-gray-900 font-serif;
 }
 
 .container {
-    @apply bg-gray-900 p-6 rounded-lg shadow-lg w-96;
+    @apply bg-white p-8 rounded-xl shadow-2xl w-96 border-2 border-yellow-300;
 }
 
 .title {
-    @apply text-center text-2xl font-bold mb-4;
+    @apply text-center text-3xl font-extrabold mb-6 text-gray-800 underline;
 }
 
 .input-container {
-    @apply flex gap-3;
+    @apply flex gap-4;
 }
 
 input {
-    @apply flex-1 p-2 bg-gray-800 border border-gray-700 rounded-lg text-white;
+    @apply flex-1 p-3 bg-yellow-50 border border-yellow-300 rounded-lg text-gray-900;
 }
 
 button {
-    @apply bg-blue-600 text-white px-4 py-2 rounded-lg transition hover:bg-blue-500;
+    @apply bg-yellow-600 text-white px-5 py-3 rounded-lg transition hover:bg-yellow-500;
 }
 
 .bookmark-list {
-    @apply mt-4;
+    @apply mt-6;
 }
 
 .bookmark-item {
-    @apply bg-gray-800 p-3 rounded-lg flex justify-between items-center mb-2;
+    @apply bg-yellow-50 p-4 rounded-lg flex justify-between items-center mb-3 border border-yellow-300;
 }
 
 .bookmark-item a {
-    @apply text-blue-400 hover:underline;
+    @apply text-yellow-600 hover:underline;
 }
 
 .bookmark-item button {
-    @apply bg-red-600 text-white px-2 py-1 rounded-lg transition hover:bg-red-500;
+    @apply bg-red-600 text-white px-3 py-2 rounded-lg transition hover:bg-red-500;
 }
