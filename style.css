@@ -41,3 +41,4 @@ button {
 .bookmark-item button {
     @apply bg-red-600 text-white px-3 py-2 rounded-lg transition hover:bg-red-500;
 }
+
